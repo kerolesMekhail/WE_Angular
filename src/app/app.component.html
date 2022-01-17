@@ -1,0 +1,84 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Right Align Bootstrap Buttons</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<div dir="rtl">
+  <div class="wrapper" >
+     <!-- Sidebar -->
+     <nav id="sidebar" dir="rtl">
+      <div class="sidebar-header">
+      <button type="button" class="btn btn-warning btnhome">الموظفين</button>
+      </div>
+      <a routerLink="/create" class="btn btn-warning btnhome" (click)="action='add'">اضافة موظف جديد</a>
+  </nav>
+  
+    <!-- Page Content -->
+    <div id="content" dir="rtl">
+      <div class="bs-example">
+        <div class="container">
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12 bg-light text-right">
+                    <button type="button" class="btn btn-primary btnhome" (click)="getAllDataByType('1')">موظفين جدد<br>{{newEmployees}}</button>
+                    <button type="button" class="btn btn-warning ml-2 btnhome"(click)="getAllDataByType('2')" >موظفين تحت الاختبار<br>{{probationaryStaff}}</button>
+                    <button type="button" class="btn btn-warning ml-2 btnhome" (click)="getAllDataByType('3')">موظفين قائمين<br>{{existingEmployees}}</button>
+                    <button type="button" class="btn btn-danger ml-2 btnhome" (click)="getAllDataByType('4')">موظفين محاليين للمعاش<br>{{localEmployeesForPension}}</button>
+                </div>
+            </div>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">رقم الموظف</th>
+                  <th scope="col">الاسم</th>
+                  <th scope="col">الوظيفه</th>
+                  <th scope="col">حدث</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let emp of Data">
+                  <th scope="row">{{emp.emp_id}}</th>
+                  <td>{{emp.emp_name}}</td>
+                  <td>{{emp.emp_job}}</td>
+                  <td>
+                    <button type="button" class="btn btn-danger" (click)="DeleteEmployee(emp.emp_id)"> حذف</button>
+                    <button type="button" class="btn btn-warning" (click)="getEmployee(emp.emp_id)"> تعديل</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-md-8">
+                <div *ngIf="action=='add'||action=='edit'">
+                  <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" [(ngModel)]="name"
+                    class="form-control" aria-describedby="emailHelp" placeholder="ادخل الاسم">
+                  </div>
+                  <div class="form-group">
+                      <label dir="rtl">الوظيفة</label>
+                      <input type="text" [(ngModel)]="job" class="form-control" aria-describedby="emailHelp" placeholder="ادخل الوظيفة">
+                    </div>
+                    <div class="form-group" style="width: 500px;">
+                    <select class="form-select" [(ngModel)]="status" aria-label="Default select example">
+                      <option value="">اختر حاله</option>
+                      <option value="1">موظفين جدد</option>
+                      <option value="2">موظفين تحت الاختبار</option>
+                      <option value="3">موظفين قائمين</option>
+                      <option value="4">موظفين محاين للمعاش</option>
+                    </select>
+                    </div>
+                  <button *ngIf="action=='add'" type="submit" class="btn btn-primary" (click)="creatEmployee()">حفظ</button>
+                  <a *ngIf="action=='add'"  routerLink="/create" class="btn btn-warning btnhome" (click)="action='add'">اضافة موظف جديد</a>
+                  <button *ngIf="action=='edit'" type="submit" class="btn btn-primary" (click)="editEmployee()">تعديل</button>
+                  </div>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+   
+  </div>
+</div>

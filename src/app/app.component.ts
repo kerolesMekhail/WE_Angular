@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from './Services/http-service.service';
-
+import {ExcelService} from './excel.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private httpServiceService: HttpServiceService) {
+  
+  constructor(private httpServiceService: HttpServiceService,private excelService:ExcelService) {
 
   }
   title = 'weTest';
@@ -90,6 +91,12 @@ export class AppComponent implements OnInit {
       this.job="";
     });
   }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.Data, 'myExcelFile');
+ }
+
 }
+
 
 

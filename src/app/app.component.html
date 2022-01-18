@@ -27,6 +27,9 @@
                     <button type="button" class="btn btn-danger ml-2 btnhome" (click)="getAllDataByType('4')">موظفين محاليين للمعاش<br>{{localEmployeesForPension}}</button>
                 </div>
             </div>
+            <div>
+              <button (click)="exportAsXLSX()" class="btn btn-success">ExportTOExcel</button> 
+            </div>
             <table class="table">
               <thead class="thead-dark">
                 <tr>
